@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "938706844087",
+    "firebase_url": "https://curiophysics.firebaseio.com",
+    "project_id": "curiophysics",
+    "storage_bucket": "curiophysics.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938706844087:android:1ac085d91cedd544",
+        "android_client_info": {
+          "package_name": "com.curio.curiophysics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938706844087-rma145ic7dljisr5n7akl2nmjdjnpag6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.curio.curiophysics",
+            "certificate_hash": "a4c89ae633e4e39840f76cc6fb26c624c9ccf0c3"
+          }
+        },
+        {
+          "client_id": "938706844087-i1nue33spvftqqqk82fmblm8qpbgbtq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-tPu92H90H6S7j1Kj_nkC46bopy3I6jQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938706844087-i1nue33spvftqqqk82fmblm8qpbgbtq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
