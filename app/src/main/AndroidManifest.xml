@@ -20,11 +20,6 @@
         <activity
             android:name=".NotesLoader"
             android:theme="@style/AppTheme2" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".NewChapterActivity"></activity>
     </application>
 
 </manifest>

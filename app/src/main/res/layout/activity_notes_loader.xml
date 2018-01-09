@@ -1,70 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.daprlabs.aaron.swipedeck.layouts.SwipeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:swipedeck="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#009688"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    app:title="Chapter Name"
+    app:titleTextColor="@android:color/white"
+    android:theme="?attr/actionBarTheme">
+        <com.nightonke.boommenu.BoomMenuButton
+            android:id="@+id/action_bar_left_bmb"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:bmb_backgroundEffect="false"
+            app:bmb_hamHeight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="end"
+            app:bmb_normalColor="@color/primary" />
 
-        <com.daprlabs.aaron.swipedeck.SwipeDeck
-            android:id="@+id/note_swipe_deck"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:padding="20dp"
-            swipedeck:card_spacing="10dp"
-            swipedeck:max_visible="3"
-            swipedeck:render_above="true"
-            swipedeck:rotation_degrees="15">
-
-        </com.daprlabs.aaron.swipedeck.SwipeDeck>
-
-    </com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout>
-
-    <LinearLayout
+    </android.support.v7.widget.Toolbar>
+    <ProgressBar
+        android:id="@+id/progres_notes"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_light"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:orientation="horizontal"
-        android:elevation="5dp"
-        android:weightSum="10">
+        android:layout_gravity="center_horizontal"
+        android:foregroundGravity="bottom" />
 
-        <ImageButton
-            android:id="@+id/btn_close"
-            android:contentDescription="close the current sub chapter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_close_black_24dp"
-            android:layout_gravity="center_vertical"/>
+    <com.daprlabs.aaron.swipedeck.SwipeDeck
+        android:id="@+id/note_swipe_deck"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="15dp"
+        android:padding="20dp"
+        swipedeck:card_spacing="10dp"
+        swipedeck:max_visible="3"
+        swipedeck:render_above="true"
+        swipedeck:rotation_degrees="15">
 
-        <ProgressBar
-            android:id="@+id/progres_notes"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="6" />
+    </com.daprlabs.aaron.swipedeck.SwipeDeck>
 
-        <ImageButton
-            android:id="@+id/btn_goBack"
-            android:contentDescription="go back to the previous note"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_arrow_back_black_24dp"
-            android:layout_gravity="center_vertical"/>
 
-    </LinearLayout>
 
-</LinearLayout>
+</com.daprlabs.aaron.swipedeck.layouts.SwipeLinearLayout>

@@ -1,6 +1,5 @@
 package com.curio.curiophysics.Model;
 
-import com.curio.curiophysics.NewChapterActivity;
 import java.util.List;
 
 /**
@@ -9,10 +8,10 @@ import java.util.List;
 
 public class Chapter  {
     public List<SubChapter> subChapters;
-    int id;
-    String name;
-    String description;
-    String color;
+    private int id;
+    private String name;
+    private String description;
+    private String color;
 
     public Chapter() {
     }

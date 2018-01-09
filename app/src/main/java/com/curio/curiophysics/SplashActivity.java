@@ -13,6 +13,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        //TODO add ripple to the button
         btnImCurious=findViewById(R.id.btn_im_curious);
         btnImCurious.setOnClickListener(new View.OnClickListener() {
             @Override

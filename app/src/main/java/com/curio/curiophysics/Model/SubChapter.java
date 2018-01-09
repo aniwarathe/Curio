@@ -8,14 +8,16 @@ import android.os.Parcelable;
  */
 
 public class SubChapter  {
-    int id;
-    String name;
+    private int id;
+    private String name;
+    private String color;
     public SubChapter() {
     }
 
-    public SubChapter(int id, String name) {
+    public SubChapter(int id, String name,String color) {
         this.id=id;
         this.name=name;
+        this.color=color;
     }
 
     public long getId() {
@@ -32,5 +34,13 @@ public class SubChapter  {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

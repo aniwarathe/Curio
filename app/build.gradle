@@ -63,6 +63,9 @@ dependencies {
         transitive=true
     }
 
+    compile 'com.github.dekoservidoni:omfm:1.0.3'
+    compile 'in.shadowfax:proswipebutton:1.0.1'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

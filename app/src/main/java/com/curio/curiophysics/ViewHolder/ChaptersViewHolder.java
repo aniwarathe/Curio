@@ -18,8 +18,10 @@ import com.nightonke.boommenu.BoomMenuButton;
 
 public class ChaptersViewHolder extends AbstractExpandableItemViewHolder {
     public TextView chapterTitle;
+    public ImageView chapterBackground;
     public ChaptersViewHolder(View itemView) {
         super(itemView);
         chapterTitle=itemView.findViewById(R.id.chapter_title);
+        chapterBackground=itemView.findViewById(R.id.image_color);
     }
 }

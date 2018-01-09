@@ -21,15 +21,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.curio.curiophysics.Adapters.ChaptersAdapter;
 import com.curio.curiophysics.Common.CurrentChapter;
+import com.curio.curiophysics.Common.CurrentChaptersArray;
 import com.curio.curiophysics.Interface.ItemClickListner;
 import com.curio.curiophysics.Model.Chapter;
 import com.curio.curiophysics.Model.SubChapter;
 import com.curio.curiophysics.ViewHolder.ChaptersViewHolder;
+import com.curio.curiophysics.ViewHolder.SubChaptersViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.h6ah4i.android.widget.advrecyclerview.expandable.RecyclerViewExpandableItemManager;
+import com.h6ah4i.android.widget.advrecyclerview.utils.RecyclerViewAdapterUtils;
 
 import java.util.ArrayList;
 
@@ -49,8 +53,10 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerViewExpandableItemManager expMgr;
-    ProgressBar recyclerProgressBar;
+    ProgressBar progressBarChapters;
     AlertDialog.Builder alertDialogBuilder;
+    public Intent chaptersIntent;
+    public static View.OnClickListener mItemOnClickListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +74,8 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         //progress bar
-        recyclerProgressBar=findViewById(R.id.recycler_progress);
+        progressBarChapters=findViewById(R.id.progress_chapters);
+        progressBarChapters.setScaleY(2f);
 
         //alert diaog
         alertDialogBuilder = new AlertDialog.Builder(this);
@@ -80,6 +87,13 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
         linearLayoutManager.setAutoMeasureEnabled(false);
         recyclerView.setLayoutManager(linearLayoutManager);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+
+        mItemOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickItemView(v);
+            }
+        };
 
         //firebase
         database = FirebaseDatabase.getInstance();
@@ -112,7 +126,7 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            Toast.makeText(ChaptersActivity.this, "No Internet", Toast.LENGTH_SHORT).show();
+                            //TODO add dialog box to indcate the error ,not connecting to the database
 
                         }
                     });
@@ -121,7 +135,7 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(ChaptersActivity.this, "No Internet", Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -130,12 +144,31 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
     //method to get the chapters and subchapters from firebase and call the adapter
 
     public void storageContainer(ArrayList<Chapter> chapters){
-        recyclerProgressBar.setVisibility(ProgressBar.GONE);
+        progressBarChapters.setVisibility(View.GONE);
+        CurrentChaptersArray.currentChaptersArray=chapters;
         expMgr=new RecyclerViewExpandableItemManager(null);
         adapter=expMgr.createWrappedAdapter(new ChaptersAdapter(chapters));
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
         expMgr.attachRecyclerView(recyclerView);
+    }
+    void onClickItemView(View v) {
+        RecyclerView.ViewHolder vh = RecyclerViewAdapterUtils.getViewHolder(v);
+        int flatPosition = vh.getAdapterPosition();
+
+        long packedPosition = expMgr.getExpandablePosition(flatPosition);
+        int groupPosition = RecyclerViewExpandableItemManager.getPackedPositionGroup(packedPosition);
+        int childPosition = RecyclerViewExpandableItemManager.getPackedPositionChild(packedPosition);
+        String noteId=String.valueOf(groupPosition+1)+String.valueOf(childPosition+1);
+        CurrentChapter.CurrentChapter=CurrentChaptersArray.currentChaptersArray.get(groupPosition);
+        chaptersIntent=new Intent(ChaptersActivity.this,NotesLoader.class);
+        chaptersIntent.putExtra("noteId",noteId);
+        startActivity(chaptersIntent);
+
+        if (flatPosition == RecyclerView.NO_POSITION) {
+            return;
+        }
+
     }
 
     @Override
