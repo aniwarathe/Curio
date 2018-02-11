@@ -1,5 +1,6 @@
 package com.curio.curiophysics.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  */
 
 public class Chapter  {
-    public List<SubChapter> subChapters;
+    public ArrayList<SubChapter> subChapters;
     private int id;
     private String name;
     private String description;
@@ -16,7 +17,7 @@ public class Chapter  {
     public Chapter() {
     }
 
-    public Chapter(List<SubChapter> subChapters, int id, String name, String description, String color) {
+    public Chapter(ArrayList<SubChapter> subChapters, int id, String name, String description, String color) {
         this.subChapters = subChapters;
         this.id = id;
         this.name = name;
@@ -24,12 +25,13 @@ public class Chapter  {
         this.color = color;
     }
 
-    public List<SubChapter> getsubChapters() {
-        return subChapters;
+
+    public void setsubChapters(ArrayList<SubChapter> subChapters) {
+        this.subChapters = subChapters;
     }
 
-    public void setsubChapters(List<SubChapter> subChapters) {
-        this.subChapters = subChapters;
+    public List<SubChapter> getSubChapters() {
+        return subChapters;
     }
 
     public long getId() {

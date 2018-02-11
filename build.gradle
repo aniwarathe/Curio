@@ -11,6 +11,10 @@ buildscript {
         maven {
             url "https://jitpack.io"
         }
+        maven {
+            url "http://dl.bintray.com/rilixtech/maven"
+        }
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'

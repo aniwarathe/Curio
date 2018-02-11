@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.curio.curiophysics.ChaptersActivity;
 import com.curio.curiophysics.Model.Chapter;
@@ -73,7 +74,7 @@ public class ChaptersAdapter extends AbstractExpandableItemAdapter<ChaptersViewH
     public void onBindGroupViewHolder(ChaptersViewHolder holder, int groupPosition, int viewType) {
         Chapter group = mItems.get(groupPosition);
         holder.chapterTitle.setText(group.getName());
-        holder.chapterBackground.setBackgroundColor(Color.parseColor("#ffa000"));
+        holder.chapterBackground.setBackgroundColor(Color.parseColor(group.getColor()));
 
     }
 

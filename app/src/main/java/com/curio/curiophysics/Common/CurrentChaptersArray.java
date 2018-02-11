@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 
 public class CurrentChaptersArray {
-    public static ArrayList<Chapter> currentChaptersArray;
+    public  static ArrayList<Chapter> currentChaptersArray;
 }

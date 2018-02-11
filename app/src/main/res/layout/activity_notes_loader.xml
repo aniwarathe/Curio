@@ -1,54 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.daprlabs.aaron.swipedeck.layouts.SwipeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.daprlabs.aaron.swipedeck.layouts.SwipeRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:swipedeck="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/primary"
     >
 
     <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorPrimary"
+    android:background="?attr/colorPrimaryDark"
     android:minHeight="?attr/actionBarSize"
     app:title="Chapter Name"
     app:titleTextColor="@android:color/white"
     android:theme="?attr/actionBarTheme">
-        <com.nightonke.boommenu.BoomMenuButton
-            android:id="@+id/action_bar_left_bmb"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            app:bmb_backgroundEffect="false"
-            app:bmb_hamHeight="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_gravity="end"
-            app:bmb_normalColor="@color/primary" />
-
     </android.support.v7.widget.Toolbar>
+
     <ProgressBar
         android:id="@+id/progres_notes"
         style="?android:attr/progressBarStyleHorizontal"
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:foregroundGravity="bottom" />
+        android:indeterminateOnly="false"
+        android:layout_alignParentStart="true"
+        android:progressDrawable="@drawable/progress_bar"/>
 
     <com.daprlabs.aaron.swipedeck.SwipeDeck
         android:id="@+id/note_swipe_deck"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_marginTop="15dp"
+        android:layout_below="@id/progres_notes"
         android:padding="20dp"
         swipedeck:card_spacing="10dp"
         swipedeck:max_visible="3"
         swipedeck:render_above="true"
         swipedeck:rotation_degrees="15">
-
     </com.daprlabs.aaron.swipedeck.SwipeDeck>
 
-
-
-</com.daprlabs.aaron.swipedeck.layouts.SwipeLinearLayout>
+    </com.daprlabs.aaron.swipedeck.layouts.SwipeRelativeLayout>

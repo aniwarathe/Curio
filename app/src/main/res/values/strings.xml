@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">CurioPhysics</string>
-    <string name="im_curious">I AM CURIOUS</string>
+    <string name="app_name">Curio</string>
     <string name="select_anguage">Select Your Language</string>
     <string name="curious_icon">fa-hand-o-right </string>
     <string name="title_activity_chpters">ChptersActivity</string>
