@@ -10,18 +10,13 @@
             android:title="About Curio" />
 
         <item
-            android:id="@+id/nav_join"
+            android:id="@+id/nav_contribute"
             android:icon="@drawable/ic_group_add_black_24dp"
-            android:title="Join Curio" />
+            android:title="Contribute" />
         <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_email_black_24dp"
             android:title="Send feedback" />
-
-        <item
-            android:id="@+id/nav_donate"
-            android:icon="@drawable/ic_monetization_on_black_24dp"
-            android:title="Donate" />
     </group>
 
     <item android:title="Spread the word">

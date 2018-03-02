@@ -30,7 +30,7 @@ public class Chapter  {
         this.subChapters = subChapters;
     }
 
-    public List<SubChapter> getSubChapters() {
+    public ArrayList<SubChapter> getSubChapters() {
         return subChapters;
     }
 

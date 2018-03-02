@@ -1,7 +1,12 @@
 package com.curio.curiophysics.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +17,10 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.curio.curiophysics.Model.Note;
 import com.curio.curiophysics.R;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.facebook.share.model.ShareLinkContent;
 import com.rilixtech.materialfancybutton.MaterialFancyButton;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONObject;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -29,25 +30,21 @@ import mehdi.sakout.fancybuttons.FancyButton;
  */
 
 public class SwipeNoteAdapter extends BaseAdapter {
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReferenceFromUrl("gs://curiophysics.appspot.com").child("1.json");
-
 
     private ArrayList<Note> notes;
-    private ArrayList<JSONObject> anims;
-    Context context;
-    LottieAnimationView lottieAnimationView;
-    JSONObject jsonObject;
-    InputStream inputStream;
-    ArrayList<InputStream> inputStreams;
+    private String subChapterName;
+    private Context context;
+    private LottieAnimationView lottieAnimationView;
 
 
-    public SwipeNoteAdapter(ArrayList<Note> notes, Context context) {
+    public SwipeNoteAdapter(ArrayList<Note> notes, String subChapterName, Context context) {
         this.notes = notes;
+        this.subChapterName = subChapterName;
         this.context = context;
         // this.jsonObject=anim;
 
     }
+
     @Override
     public int getCount() {
         return notes.size();
@@ -66,10 +63,12 @@ public class SwipeNoteAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
-
         if (notes.get(position).getType().equals("0")) {
             LayoutInflater inflater = LayoutInflater.from(context);
             v = inflater.inflate(R.layout.note_item_front, parent, false);
+
+            ((TextView) v.findViewById(R.id.note_title)).setText(subChapterName);
+
 
             MaterialFancyButton facebookLoginBtn;
             facebookLoginBtn = v.findViewById(R.id.btn_facebook);
@@ -83,35 +82,56 @@ public class SwipeNoteAdapter extends BaseAdapter {
             facebookLoginBtn.setIconPosition(FancyButton.POSITION_LEFT);
             facebookLoginBtn.setFontIconSize(30);
 
+
+
         } else if (notes.get(position).getType().equals("1")) {
             LayoutInflater inflater = LayoutInflater.from(context);
             v = inflater.inflate(R.layout.note_item_with_anim, parent, false);
-            lottieAnimationView=v.findViewById(R.id.anim);
-            ((TextView) v.findViewById(R.id.note_text)).setText(notes.get(position).getNote());
-           // lottieAnimationView.setAnimation(notes.get(position).getAnim());
-            lottieAnimationView.setAnimation("1102.json");
+            lottieAnimationView = v.findViewById(R.id.anim);
+
+            TextView note= v.findViewById((R.id.note_text));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                note.setText(Html.fromHtml(notes.get(position).getNote(),Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                note.setText(Html.fromHtml(notes.get(position).getNote()));
+            }
+
+            //lottieAnimationView.setAnimation(notes.get(position).getAnim());
+            lottieAnimationView.setAnimation("1205.json");
+            // lottieAnimationView.setAnimation("120");
             lottieAnimationView.playAnimation();
 
         } else if (notes.get(position).getType().equals("2")) {
             LayoutInflater inflater = LayoutInflater.from(context);
             v = inflater.inflate(R.layout.note_item_with_image, parent, false);
-            ((TextView) v.findViewById(R.id.note_text)).setText(notes.get(position).getNote());
-            Picasso.with(context).load(notes.get(position).getImage()).into((ImageView)v.findViewById(R.id.note_image));
+
+            TextView note= v.findViewById((R.id.note_text));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                note.setText(Html.fromHtml(notes.get(position).getNote(),Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                note.setText(Html.fromHtml(notes.get(position).getNote()));
+            }
+
+            Picasso.with(context).load(notes.get(position).getImage()).into((ImageView) v.findViewById(R.id.note_image));
 
         } else if (notes.get(position).getType().equals("3")) {
             LayoutInflater inflater = LayoutInflater.from(context);
             v = inflater.inflate(R.layout.note_item_only_text, parent, false);
-            ((TextView)v.findViewById(R.id.note_title)).setText(notes.get(position).getTitle());
-            ((TextView) v.findViewById(R.id.note_text)).setText(notes.get(position).getNote());
+            TextView note= v.findViewById((R.id.note_text));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                note.setText(Html.fromHtml(notes.get(position).getNote(),Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                note.setText(Html.fromHtml(notes.get(position).getNote()));
+            }
 
-        }
-        else if (notes.get(position).getType().equals("4")) {
+
+        } else if (notes.get(position).getType().equals("4")) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            v = inflater.inflate(R.layout.note_item_with_addview, parent, false);
-
+            v = inflater.inflate(R.layout.note_item_last, parent, false);
         }
         return v;
     }
+
 }
 
 

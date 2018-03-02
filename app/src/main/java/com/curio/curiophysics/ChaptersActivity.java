@@ -1,9 +1,11 @@
 package com.curio.curiophysics;
 
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,17 +21,25 @@ import android.view.View;
 
 import com.curio.curiophysics.Adapters.ChaptersAdapter;
 import com.curio.curiophysics.Common.CurrentChaptersArray;
-import com.curio.curiophysics.Common.CurrentSubChapterData;
+import com.curio.curiophysics.Common.TappedSubChapterData;
 import com.h6ah4i.android.widget.advrecyclerview.expandable.RecyclerViewExpandableItemManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.RecyclerViewAdapterUtils;
 
-public class ChaptersActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import java.util.ArrayList;
+
+public class ChaptersActivity extends AppCompatActivity
+        implements
+        NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerViewExpandableItemManager expMgr;
     public Intent chaptersIntent;
     public static View.OnClickListener mItemOnClickListener;
+
+    int tappedSubChapterId;
+    String nextSubChapterId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +59,7 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
         //recycler view
 
         recyclerView = findViewById(R.id.chapters_recycler_view);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setAutoMeasureEnabled(false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
@@ -68,10 +78,10 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
 
     //method to get the chapters and subchapters from firebase and call the adapter
 
-    public void storageContainer(){
-                //CurrentChaptersArray.currentChaptersArray=chapters;
-        expMgr=new RecyclerViewExpandableItemManager(null);
-        adapter=expMgr.createWrappedAdapter(new ChaptersAdapter(CurrentChaptersArray.currentChaptersArray));
+    public void storageContainer() {
+        //CurrentChaptersArray.currentChaptersArray=chapters;
+        expMgr = new RecyclerViewExpandableItemManager(null);
+        adapter = expMgr.createWrappedAdapter(new ChaptersAdapter(CurrentChaptersArray.currentChaptersArray));
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
         expMgr.attachRecyclerView(recyclerView);
@@ -84,14 +94,17 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
         long packedPosition = expMgr.getExpandablePosition(flatPosition);
         int groupPosition = RecyclerViewExpandableItemManager.getPackedPositionGroup(packedPosition);
         int childPosition = RecyclerViewExpandableItemManager.getPackedPositionChild(packedPosition);
-        String subChapterId=String.valueOf(groupPosition+1)+String.valueOf(childPosition+1);
 
-        CurrentSubChapterData.CurrentChapter=CurrentChaptersArray.currentChaptersArray.get(groupPosition);
-        CurrentSubChapterData.CurrentSubChapter=CurrentSubChapterData.CurrentChapter.getSubChapters().get(childPosition);
+        tappedSubChapterId = childPosition;
 
-        chaptersIntent=new Intent(ChaptersActivity.this,NotesLoader.class);
-        chaptersIntent.putExtra("subChapterId",subChapterId);
-        startActivity(chaptersIntent);
+//for future use
+        TappedSubChapterData.currentChapter = CurrentChaptersArray.currentChaptersArray.get(groupPosition);
+        TappedSubChapterData.currentSubChapter = TappedSubChapterData.currentChapter.getSubChapters().get(childPosition);
+        TappedSubChapterData.subChaptersInChapter=TappedSubChapterData.currentChapter.getSubChapters().size();
+
+        Intent noteLoadingIntent = new Intent(ChaptersActivity.this, NoteLoaderFragmemts.class);
+        noteLoadingIntent.putExtra("tappedSubChapter", tappedSubChapterId);
+        startActivity(noteLoadingIntent);
 
         if (flatPosition == RecyclerView.NO_POSITION) {
             return;
@@ -135,25 +148,34 @@ public class ChaptersActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent=new Intent(ChaptersActivity.this,NavigationDrawerContainerActivity.class);
 
-        /*if (id == R.id.na) {
+        if (id == R.id.nav_about) {
+            intent.putExtra("navigationFragmentName","About");
+            startActivity(intent);
+
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_contribute) {
+            intent.putExtra("navigationFragmentName","Contribute");
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_feedback) {
+            intent.putExtra("navigationFragmentName","FeedBack");
+            startActivity(intent);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_fb_like) {
+            intent.putExtra("navigationFragmentName","Facebook");
+            startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_rate) {
+            intent.putExtra("navigationFragmentName","Rate");
+            startActivity(intent);
 
-        } else if (id == R.id.nav_send) {
-
-        }*/
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 }

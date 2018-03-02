@@ -6,43 +6,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#26a69a"
+    android:background="@color/background"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.curio.curiophysics.ChaptersActivity"
     tools:showIn="@layout/app_bar_chapters">
 
-
-    <LinearLayout
-        android:id="@+id/card_notice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_notice"
-        android:orientation="vertical"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/chapter_not_available"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </LinearLayout>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chapters_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/card_notice"/>
-
-        android:layout_marginBottom="16dp"
-        />
+        android:layout_marginBottom="16dp" />
 </RelativeLayout>

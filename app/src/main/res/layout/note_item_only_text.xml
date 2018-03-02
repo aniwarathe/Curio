@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="10dp"
     android:layout_marginTop="20dp"
@@ -11,23 +11,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:weightSum="10">
-        <TextView
-            android:id="@+id/note_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:text="්‍රවේගය"/>
             
         <TextView
             android:id="@+id/note_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16sp"
+            android:lineSpacingExtra="3dp"
             android:textAlignment="center"
             android:gravity="center_vertical"
             android:layout_weight="9"

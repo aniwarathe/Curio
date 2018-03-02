@@ -34,6 +34,10 @@ public class ChaptersAdapter extends AbstractExpandableItemAdapter<ChaptersViewH
         mItems=chapterItems;
     }
 
+    public int getChild(int groupPosition){
+        return getChildCount(groupPosition);
+    }
+
     @Override
     public int getGroupCount() {
         return mItems.size();

@@ -24,6 +24,7 @@ import com.curio.curiophysics.Common.CurrentChaptersArray;
 import com.curio.curiophysics.Model.Chapter;
 import com.curio.curiophysics.Model.SubChapter;
 import com.curio.curiophysics.Util.DataBaseUtil;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,10 +52,10 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         final CoordinatorLayout coordinatorLayout=findViewById(R.id.coordinator);
 
-
+        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
 
         //progress bar
-        final AVLoadingIndicatorView loading=(AVLoadingIndicatorView)findViewById(R.id.loading);
+        final AVLoadingIndicatorView loading= findViewById(R.id.loading);
         loading.show();
 
         //firebase
@@ -76,7 +77,7 @@ public class SplashActivity extends AppCompatActivity {
                 } else {
                     if (!isConnectedToInternet(context)) {
 
-                        Snackbar snackbar = Snackbar.make(coordinatorLayout,"No network connection" , Snackbar.LENGTH_INDEFINITE);
+                        Snackbar snackbar = Snackbar.make(coordinatorLayout,"No network connection,Please connect for new content" , Snackbar.LENGTH_INDEFINITE);
                         snackbar.show();}
                 }
             }
