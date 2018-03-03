@@ -59,7 +59,6 @@ public class ChaptersActivity extends AppCompatActivity
 
         recyclerView = findViewById(R.id.chapters_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setAutoMeasureEnabled(false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -86,6 +85,7 @@ public class ChaptersActivity extends AppCompatActivity
 
     void onClickItemView(View v) {
         RecyclerView.ViewHolder vh = RecyclerViewAdapterUtils.getViewHolder(v);
+        assert vh != null;
         int flatPosition = vh.getAdapterPosition();
 
         long packedPosition = expMgr.getExpandablePosition(flatPosition);

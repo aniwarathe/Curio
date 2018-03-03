@@ -26,9 +26,11 @@ public class NoteLoaderFragmemts extends AppCompatActivity implements NoteFragme
         switch (item.getItemId()) {
             case R.id.action_skip_next:
                 subChaptersViewPager.setCurrentItem(subChaptersViewPager.getCurrentItem()+1);
+                assert getSupportActionBar() != null;
                 getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());
                 return true;
             case R.id.action_skip_prev:
+                assert getSupportActionBar() != null;
                 subChaptersViewPager.setCurrentItem(subChaptersViewPager.getCurrentItem()-1);
                 getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());
                 return true;
@@ -64,6 +66,7 @@ public class NoteLoaderFragmemts extends AppCompatActivity implements NoteFragme
         //action bar
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());
 
@@ -93,6 +96,7 @@ public class NoteLoaderFragmemts extends AppCompatActivity implements NoteFragme
             @Override
             public void run() {
                 subChaptersViewPager.setCurrentItem(subChaptersViewPager.getCurrentItem()+1);
+                assert getSupportActionBar() != null;
                 getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());
             }
         },500);

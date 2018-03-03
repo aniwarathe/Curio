@@ -24,17 +24,13 @@ public class NavigationDrawerContainerActivity extends AppCompatActivity {
         urlWebView.getSettings().setJavaScriptEnabled(true);
 
         String drawerFragmentName=getIntent().getStringExtra("navigationFragmentName");
-        if(drawerFragmentName.equals("About")) {
-
-        }else if(drawerFragmentName.equals("Contribute")){
+        if(drawerFragmentName.equals("Contribute")){
             urlWebView.loadUrl("https://docs.google.com/forms/d/1U92sdYDjz7y-f4KYKLa5zQh66yesNJmEkHqrbp7avkc/edit");
             this.setContentView(urlWebView);
 
         }else if(drawerFragmentName.equals("FeedBack")){
             urlWebView.loadUrl("https://curiolearning.typeform.com/to/VvlAZT");
             this.setContentView(urlWebView);
-        }else if(drawerFragmentName.equals("Facebook")){
-
         }else if(drawerFragmentName.equals("Rate")){
             Toast.makeText(this, drawerFragmentName, Toast.LENGTH_SHORT).show();
         }

@@ -7,28 +7,28 @@
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_black_24dp"
-            android:title="About Curio | කියුරියෝ ගැන" />
+            android:title="@string/drawer_nemu_about_curio" />
 
         <item
             android:id="@+id/nav_contribute"
             android:icon="@drawable/ic_group_add_black_24dp"
-            android:title="Contribute | දායක වන්න" />
+            android:title="@string/drawer_menu_contribute" />
         <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_email_black_24dp"
-            android:title="Send feedback | ප්‍රතිචාර" />
+            android:title="@string/drawer_menu_send_feedback" />
     </group>
 
-    <item android:title="Spread the word">
+    <item android:title="@string/drawer_menu_spread_the_word">
         <menu>
             <item
                 android:id="@+id/nav_fb_like"
                 android:icon="@drawable/ic_thumb_up_black_24dp"
-                android:title="Like us on facebook" />
+                android:title="@string/drawer_menu_like_us_on_facebook" />
             <item
                 android:id="@+id/nav_rate"
                 android:icon="@drawable/ic_mood_black_24dp"
-                android:title="Rate us" />
+                android:title="@string/drawer_menu_rate_us" />
         </menu>
     </item>
 

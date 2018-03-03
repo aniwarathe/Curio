@@ -1,4 +1,4 @@
-package com.curio.curiophysics;
+package com.curiolearning.curio;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
