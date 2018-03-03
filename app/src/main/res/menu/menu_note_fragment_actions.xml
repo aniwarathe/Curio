@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_refresh"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_replay"
-        android:title="Refresh"/>
-    <item
-        android:id="@+id/overflow"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_action_overflow"
-        android:title="Refresh">
-        <menu>
             <item
                 android:id="@+id/action_skip_prev"
                 android:orderInCategory="100"
-                app:showAsAction="never"
-                android:icon="@drawable/ic_skip_previous"
+                app:showAsAction="always"
+                android:icon="@drawable/ic_keyboard_arrow_left"
                 android:title="Previous"/>
 
             <item
                 android:id="@+id/action_skip_next"
                 android:orderInCategory="100"
-                app:showAsAction="never"
-                android:icon="@drawable/ic_skip_next"
+                app:showAsAction="always"
+                android:icon="@drawable/ic_keyboard_arrow_right"
                 android:title="Next"/>
-        </menu>
-    </item>
-
 </menu>

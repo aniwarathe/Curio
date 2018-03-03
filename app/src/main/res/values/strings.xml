@@ -12,7 +12,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-   <string name="facebook_app_id">2070080206645380</string>
+    <string name="facebook_app_id">2070080206645380</string>
+    <string name="curio_about_description">ලෝකෙට එච්චරම අලුත් නොවුනත් ලංකාවට අලුත් සංකල්පයක් වෙච්ච mobile learning, ඉගෙනීම කියන දේට අලුත්ම අත්දැකීමක් එකතු කරන්නේ ඕනම තැනක ඉදන් ඕනම වෙලාවක දෙයක් ඉගෙන ගන්න පුළුවන් නිසායි.හිතලා බලන්න, උදේ නැගිට්ට වෙලාවේ ඉඳන් නිදාගන්න යනකල්ම අපි අතින් නාස්ති වෙලා යන වෙලාව ගැන.Curio උදව් කරනවා ඒ පොඩි පොඩි වෙලාවල් ඵලදායී විදියට ගතකරන්න</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

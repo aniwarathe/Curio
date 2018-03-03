@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.curio.curiophysics.NoteLoaderFragmemts">
+    tools:context=".NoteLoaderFragmemts">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,17 +21,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.curio.curiophysics.CustomViewPager
+    <com.curiolearning.curio.CustomViewPager
         android:id="@+id/subchapters_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
        >
-    </com.curio.curiophysics.CustomViewPager>
-    <com.rilixtech.materialfancybutton.MaterialFancyButton
-        android:id="@+id/btn_next_sub_chapter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
-
-
+    </com.curiolearning.curio.CustomViewPager>
 </LinearLayout>

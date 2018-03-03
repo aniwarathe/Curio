@@ -7,16 +7,16 @@
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_black_24dp"
-            android:title="About Curio" />
+            android:title="About Curio | කියුරියෝ ගැන" />
 
         <item
             android:id="@+id/nav_contribute"
             android:icon="@drawable/ic_group_add_black_24dp"
-            android:title="Contribute" />
+            android:title="Contribute | දායක වන්න" />
         <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_email_black_24dp"
-            android:title="Send feedback" />
+            android:title="Send feedback | ප්‍රතිචාර" />
     </group>
 
     <item android:title="Spread the word">

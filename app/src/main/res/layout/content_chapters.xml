@@ -9,7 +9,7 @@
     android:background="@color/background"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.curio.curiophysics.ChaptersActivity"
+    tools:context=".ChaptersActivity"
     tools:showIn="@layout/app_bar_chapters">
 
     <android.support.v7.widget.RecyclerView
