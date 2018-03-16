@@ -1,5 +1,6 @@
 package com.curiolearning.curio;
 
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.curiolearning.curio.Adapters.NoteFragmentsAdapter;
 import com.curiolearning.curio.Common.TappedSubChapterData;
@@ -23,16 +28,20 @@ public class NoteLoaderFragmemts extends AppCompatActivity implements NoteFragme
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Fragment page = noteFragmentsAdapter.getItem(subChaptersViewPager.getCurrentItem());
+        NoteFragment noteFragment = (NoteFragment) page;
         switch (item.getItemId()) {
             case R.id.action_skip_next:
-                subChaptersViewPager.setCurrentItem(subChaptersViewPager.getCurrentItem()+1);
+                /*subChaptersViewPager.setCurrentItem(subChaptersViewPager.getCurrentItem()+1);
                 assert getSupportActionBar() != null;
-                getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());
+                getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());*/
+                noteFragment.swipeRight();
                 return true;
             case R.id.action_skip_prev:
                 assert getSupportActionBar() != null;
-                subChaptersViewPager.setCurrentItem(subChaptersViewPager.getCurrentItem()-1);
-                getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());
+                /*subChaptersViewPager.setCurrentItem(subChaptersViewPager.getCurrentItem()-1);
+                getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());*/
+                noteFragment.swipeLeft();
                 return true;
 
             default:
@@ -85,9 +94,8 @@ public class NoteLoaderFragmemts extends AppCompatActivity implements NoteFragme
 
     @Override
     public void onBackPressed() {
-        Fragment page = noteFragmentsAdapter.getItem(subChaptersViewPager.getCurrentItem());
-        NoteFragment noteFragment = (NoteFragment) page;
-        noteFragment.goToPrevCard();
+        finish();
+
     }
 
     @Override
@@ -100,7 +108,6 @@ public class NoteLoaderFragmemts extends AppCompatActivity implements NoteFragme
                 getSupportActionBar().setTitle(TappedSubChapterData.currentChapter.getSubChapters().get(subChaptersViewPager.getCurrentItem()).getName());
             }
         },500);
-
-
     }
+
 }

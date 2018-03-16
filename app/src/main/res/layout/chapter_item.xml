@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     app:cardBackgroundColor="@android:color/white"
-    app:cardElevation="5dp">
+    app:cardElevation="10dp">
 
     <ImageView
         android:id="@+id/image_color"

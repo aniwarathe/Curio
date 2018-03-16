@@ -22,6 +22,7 @@ import static com.curiolearning.curio.ChaptersActivity.mItemOnClickListener;
 
 public class ChaptersAdapter extends AbstractExpandableItemAdapter<ChaptersViewHolder, SubChaptersViewHolder> {
     private ArrayList<Chapter> mItems;
+    private int color;
 
     public ArrayList<Chapter> getmItems() {
         return mItems;
@@ -76,7 +77,8 @@ public class ChaptersAdapter extends AbstractExpandableItemAdapter<ChaptersViewH
     public void onBindGroupViewHolder(ChaptersViewHolder holder, int groupPosition, int viewType) {
         Chapter group = mItems.get(groupPosition);
         holder.chapterTitle.setText(group.getName());
-        holder.chapterBackground.setBackgroundColor(Color.parseColor(group.getColor()));
+        color=Color.parseColor(group.getColor());
+        holder.chapterBackground.setBackgroundColor(color);
 
     }
 
@@ -84,7 +86,7 @@ public class ChaptersAdapter extends AbstractExpandableItemAdapter<ChaptersViewH
     public void onBindChildViewHolder(SubChaptersViewHolder holder, int groupPosition, int childPosition, int viewType) {
         SubChapter child = mItems.get(groupPosition).subChapters.get(childPosition);
         holder.subChapterTitle.setText(child.getName());
-        holder.subChapterBackgroud.setBackgroundColor(Color.parseColor("#ffb300"));
+        holder.subChapterBackgroud.setBackgroundColor(color);
     }
 
     @Override

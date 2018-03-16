@@ -8,15 +8,13 @@ public class SubChapter  {
     private int id;
     private String subChapterId;
     private String name;
-    private String color;
     public SubChapter() {
     }
 
-    public SubChapter(int id,String subChapterId, String name,String color) {
+    public SubChapter(int id,String subChapterId, String name) {
         this.id=id;
         this.subChapterId=subChapterId;
         this.name=name;
-        this.color=color;
     }
 
     public long getId() {
@@ -41,13 +39,5 @@ public class SubChapter  {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 }

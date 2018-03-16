@@ -22,7 +22,7 @@ public class AboutActivity extends AppCompatActivity {
         View aboutPage = new AboutPage(this)
                 .isRTL(false)
                 .setDescription(getString(R.string.curio_about_description))
-                .setImage(R.drawable.curio_logo_1)
+                .setImage(R.drawable.curio_logo_splash)
                 .addItem(new Element().setTitle("Version 1.0"))
                 .addGroup("Connect with us")
                 .addEmail("curiolearn@gmail.com")

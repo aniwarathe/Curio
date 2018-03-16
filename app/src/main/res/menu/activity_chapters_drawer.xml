@@ -27,7 +27,7 @@
                 android:title="@string/drawer_menu_like_us_on_facebook" />
             <item
                 android:id="@+id/nav_rate"
-                android:icon="@drawable/ic_mood_black_24dp"
+                android:icon="@drawable/ic_stars_black_24dp"
                 android:title="@string/drawer_menu_rate_us" />
         </menu>
     </item>

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.curiolearning.curio.Common.CurrentChaptersArray;
 import com.curiolearning.curio.Model.Chapter;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.instabug.library.Instabug;
+import com.instabug.library.invocation.InstabugInvocationEvent;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
@@ -31,8 +34,6 @@ public class SplashActivity extends AppCompatActivity {
     DatabaseReference subChapters;
     ArrayList<Chapter> chaptersArray = new ArrayList<>();
     final Context context = this;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +62,11 @@ public class SplashActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 boolean connected = snapshot.getValue(Boolean.class);
                 if (connected) {
-                    Snackbar snackbarSuccess=Snackbar.make(coordinatorLayout,"Connected",Snackbar.LENGTH_LONG);
-                    snackbarSuccess.show();
+                    Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
                 } else {
                     if (!isConnectedToInternet(context)) {
 
-                        Snackbar snackbar = Snackbar.make(coordinatorLayout,"No network connection,Please connect for new content" , Snackbar.LENGTH_INDEFINITE);
-                        snackbar.show();}
+                        Toast.makeText(context, "Please connect to the Internet", Toast.LENGTH_SHORT).show();}
                 }
             }
 
@@ -84,6 +83,7 @@ public class SplashActivity extends AppCompatActivity {
                 for (DataSnapshot n : chaptersSet) {
                     final Chapter chapter = n.getValue(Chapter.class);
                     final String chapterKey = n.getKey();
+                    assert chapter != null;
                     chapter.setId(Integer.parseInt(chapterKey));
 
                     //subchapters
@@ -95,6 +95,7 @@ public class SplashActivity extends AppCompatActivity {
                             ArrayList<SubChapter> subChaptersArray = new ArrayList<>();
                             for (DataSnapshot n : subChaptersSet) {
                                 SubChapter subChapter = n.getValue(SubChapter.class);
+                                assert subChapter != null;
                                 subChapter.setId(Integer.parseInt(n.getKey()));
                                 subChaptersArray.add(subChapter);
                             }
@@ -122,31 +123,18 @@ public class SplashActivity extends AppCompatActivity {
                     });
                 }
             }
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
-        if (!isConnectedToInternet(context)) {
-
-            Snackbar snackbar = Snackbar.make(coordinatorLayout,"Internet connection required" , Snackbar.LENGTH_INDEFINITE).
-                            setAction("Retry", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                }
-                            });
-            snackbar.show();
-
-        }
-
     }
 
     private boolean isConnectedToInternet(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }

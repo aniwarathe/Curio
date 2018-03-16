@@ -18,7 +18,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
 
+import com.crashlytics.android.Crashlytics;
 import com.curiolearning.curio.Adapters.ChaptersAdapter;
 import com.curiolearning.curio.Common.CurrentChaptersArray;
 import com.curiolearning.curio.Common.TappedSubChapterData;
@@ -32,12 +37,13 @@ public class ChaptersActivity extends AppCompatActivity
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerViewExpandableItemManager expMgr;
-    public Intent chaptersIntent;
     public static View.OnClickListener mItemOnClickListener;
+    Intent intent;
+    DrawerLayout drawer;
+    Button btnContribute;
 
 
     int tappedSubChapterId;
-    String nextSubChapterId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +52,7 @@ public class ChaptersActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -62,6 +68,19 @@ public class ChaptersActivity extends AppCompatActivity
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+
+        //intent for navigation drawer
+        intent=new Intent(ChaptersActivity.this,NavigationDrawerContainerActivity.class);
+
+        btnContribute=findViewById(R.id.contribute);
+        btnContribute.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                intent.putExtra("navigationFragmentName","Contribute");
+                startActivity(intent);
+            }
+        });
 
         mItemOnClickListener = new View.OnClickListener() {
             @Override
@@ -111,12 +130,7 @@ public class ChaptersActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        finish();
     }
 
     @Override
@@ -145,7 +159,8 @@ public class ChaptersActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        final Intent intent=new Intent(ChaptersActivity.this,NavigationDrawerContainerActivity.class);
+
+        drawer.closeDrawers();
 
         if (id == R.id.nav_about) {
             Intent aboutIntent=new Intent(ChaptersActivity.this,AboutActivity.class);

@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import com.curiolearning.curio.Adapters.SwipeNoteAdapter;
 import com.curiolearning.curio.Model.Note;
+import com.curiolearning.curio.Util.DataBaseUtil;
 import com.daprlabs.aaron.swipedeck.SwipeDeck;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -37,7 +38,6 @@ public class NoteFragment extends Fragment {
     SwipeNoteAdapter adapter;
     SwipeDeck noteSwipeDeck;
     ArrayList<Note> notesArrayForCards = new ArrayList<>();
-    FirebaseDatabase database;
     DatabaseReference notes;
     private String subChapterNoteId;
     private String subChapterName;
@@ -52,13 +52,6 @@ public class NoteFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment NoteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NoteFragment newInstance(String subChapterNoteId,String subChapterName) {
         NoteFragment fragment = new NoteFragment();
         Bundle args = new Bundle();
@@ -130,7 +123,8 @@ public class NoteFragment extends Fragment {
     public void loadNotes(final String subChapterRef){
 
         //firebase
-        database = FirebaseDatabase.getInstance();
+        DataBaseUtil.getDatabase();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         notes = database.getReference("notes");
         notes.addValueEventListener(new ValueEventListener() {
             @Override
@@ -156,9 +150,11 @@ public class NoteFragment extends Fragment {
             public void cardSwipedLeft(long stableId) {
                 if(numberOfNotes==(notesProgressBar.getProgress()+1)){
                     mListener.lastCardReached();
-                    notesProgressBar.setProgress((int) stableId + 1);
+                    notesProgressBar.setProgress((int) stableId - 1);
                 }else
-                notesProgressBar.setProgress((int) stableId + 1);
+                    noteSwipeDeck.unSwipeCard();
+                noteSwipeDeck.unSwipeCard();
+                notesProgressBar.setProgress((int) stableId - 1);
             }
 
             @Override
@@ -186,6 +182,14 @@ public class NoteFragment extends Fragment {
         //progress Bar
         numberOfNotes=adapter.getCount();
         notesProgressBar.setMax(numberOfNotes);
+    }
+
+    public void swipeLeft(){
+        noteSwipeDeck.unSwipeCard();
+    }
+
+    public void swipeRight(){
+        noteSwipeDeck.swipeTopCardRight(0);
     }
 
 
